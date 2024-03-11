@@ -2,10 +2,17 @@
 
 #include "byte_stream.hh"
 
-#include <string>
+#include <deque>
 
 class Reassembler
 {
+private:
+	uint64_t firstAcceptIndex_;
+	uint64_t firstRejectIndex_;
+	uint64_t endIndex_;
+	bool inited_;
+	std::deque<char> reassemblerBuf_;
+	std::deque<char> flagBuf_;
 public:
   /*
    * Insert a new substring to be reassembled into a ByteStream.
@@ -27,6 +34,8 @@ public:
    *
    * The Reassembler should close the stream after writing the last byte.
    */
+  Reassembler();
+  ~Reassembler();
   void insert( uint64_t first_index, std::string data, bool is_last_substring, Writer& output );
 
   // How many bytes are stored in the Reassembler itself?
