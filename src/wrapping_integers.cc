@@ -15,6 +15,7 @@ Wrap32 Wrap32::wrap( uint64_t n, Wrap32 zero_point )
 
 uint64_t Wrap32::unwrap( Wrap32 zero_point, uint64_t checkpoint ) const
 {
+	// This function is used to calculate the absolute distance
 	function<uint64_t(uint64_t, uint64_t)> calDis = [](uint64_t a, uint64_t b) -> uint64_t {
 		if (a >= b)
 			return a - b;
